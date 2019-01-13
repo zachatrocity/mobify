@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -27,12 +28,13 @@ import { MobFileUploadComponent } from './components/mob-file-upload/mob-file-up
     MobFileUploadComponent
   ],
   imports: [
+    BrowserModule,
+    HttpClientModule,
     RouterModule.forRoot(
       [
         { path: '', component: AppComponent}
       ]
     ),
-    BrowserModule,
     BrowserAnimationsModule,
     NbThemeModule.forRoot({name: 'cosmic'}),
     NbLayoutModule,

@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { UploadOutput, UploadInput, UploadFile, humanizeBytes, UploaderOptions, UploadStatus } from 'ngx-uploader';
-
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'mob-file-upload',
   templateUrl: './mob-file-upload.component.html',
@@ -22,8 +23,8 @@ export class MobFileUploadComponent implements OnInit {
   dragOver: boolean;
   options: UploaderOptions;
 
-  constructor() {
-    this.options = { concurrency: 1, maxUploads: 10 };
+  constructor(private _http: HttpClient) {
+    this.options = { concurrency: 10, maxUploads: 10 };
     this.files = [];
     this.uploadInput = new EventEmitter<UploadInput>();
   }
@@ -46,18 +47,11 @@ export class MobFileUploadComponent implements OnInit {
 
   onUploadOutput(output: UploadOutput): void {
     if (output.type === 'allAddedToQueue') {
-      const event: UploadInput = {
-        type: 'uploadAll',
-        url: '/api/upload/files',
-        method: 'POST',
-        data: { foo: 'bar' }
-      };
-
-      this.uploadInput.emit(event);
+      this.startUpload();
     } else if (output.type === 'addedToQueue' && typeof output.file !== 'undefined') {
       this.files.push(output.file);
     } else if (output.type === 'uploading' && typeof output.file !== 'undefined') {
-      const index = this.files.findIndex(file => typeof output.file !== 'undefined' && file.id === output.file.id);
+      const index = this.files.findIndex(file => typeof output.file !== 'undefined' && file.name === output.file.name);
       this.files[index] = output.file;
     } else if (output.type === 'cancelled' || output.type === 'removed') {
       this.files = this.files.filter((file: UploadFile) => file !== output.file);
@@ -71,7 +65,7 @@ export class MobFileUploadComponent implements OnInit {
       console.log(output.file.name + ' rejected');
     }
 
-    this.files = this.files.filter(file => file.progress.status !== UploadStatus.Done);
+    // this.files = this.files.filter(file => file.progress.status !== UploadStatus.Done);
   }
 
   startUpload(): void {

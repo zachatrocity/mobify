@@ -10,3 +10,22 @@
         display: none;
     }
 }
+
+.upload-box-content {
+    transition: all 1s ease-in;
+}
+
+.drag { 
+    border-width: 3px;
+    border-style: solid;
+    -webkit-border-image: 
+      -webkit-gradient(linear, 100% 100%, 100% 100%, from(#00d9bf), to(#00d977)) 1 100%;
+    -webkit-border-image: 
+      -webkit-linear-gradient(right, #00d9bf, #00d977) 1 100%;
+    -moz-border-image:
+      -moz-linear-gradient(right, #00d9bf, #00d977) 1 100%;  
+    -o-border-image:
+      -o-linear-gradient(right, #00d9bf, #00d977) 1 100%;
+    border-image:
+      linear-gradient(to right, #00d9bf, #00d977) 1 100%; 
+}

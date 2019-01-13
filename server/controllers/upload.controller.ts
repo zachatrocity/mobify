@@ -9,9 +9,8 @@ router.get('/', (req: Request, res: Response) => {
 });
 
 router.post('/files', upload.any(), function (req, res, next) {
-    console.log('POST /upload/files')
-    // req.files is array of `photos` files
     console.log(req.files);
+    res.status(200).json(req.files);
     // req.body will contain the text fields, if there were any
   })
 
