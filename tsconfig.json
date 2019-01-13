@@ -13,8 +13,6 @@
     "typeRoots": ["node_modules/@types"],
     "lib": ["es2018", "dom"],
     "paths": {
-      "@swimlane/ngx-ui": ["dist/swimlane/ngx-ui"],
-      "@swimlane/ngx-ui/*": ["dist/swimlane/ngx-ui/*"],
       "@angular/*": ["node_modules/@angular/*"]
     },
     "allowSyntheticDefaultImports": true
