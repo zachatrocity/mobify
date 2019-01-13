@@ -1,0 +1,32 @@
+<div class="row center-xs middle-xs between-xs">
+  <div class="col-xs-12 button-container">
+    <button nbButton hero size="small" status="success" (click)="upload = false">URL</button>
+    <button nbButton hero size="small" status="success" (click)="upload = true">Upload</button>
+  </div>
+</div>
+
+<nb-flip-card showToggleButton="false" [flipped]="upload">
+  <nb-card-front>
+    <nb-card>
+      <nb-card-body>
+        <p>Enter URLs to .epub files with each URL on a new line</p>
+        <textarea nbInput fullWidth placeholder="epub files..."></textarea>
+      </nb-card-body>
+    </nb-card>
+  </nb-card-front>
+  <nb-card-back>
+    <nb-card>
+      <nb-card-body>
+        <mob-file-upload></mob-file-upload>
+      </nb-card-body>
+    </nb-card>
+  </nb-card-back>
+</nb-flip-card>
+
+<nb-checkbox status="success" [(ngModel)]="shouldEmail">Email to Kindle?</nb-checkbox>
+<nb-card *ngIf="shouldEmail">
+  <nb-card-body>
+    <input type="email" nbInput shape="rectangle" placeholder="Kindle Email">
+    <input type="email" nbInput shape="rectangle" placeholder="Amazon Email">
+  </nb-card-body>
+</nb-card>

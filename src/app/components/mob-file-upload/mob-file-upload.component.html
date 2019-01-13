@@ -1,0 +1,20 @@
+<div class="upload-box-content">
+  <div class="drop-container" ngFileDrop [options]="options" (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput">
+    <p>
+      Drag files here or
+      <label class="upload-button">
+        <input type="file" ngFileSelect [options]="options" (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput"
+          multiple> browse
+      </label>
+      to upload.
+    </p>
+  </div>
+  <div class="files">
+    <nb-list>
+      <nb-list-item *ngFor="let f of files; let i = index;">
+        <nb-progress-bar [value]="f?.progress?.data?.percentage" [status]="status(f?.progress?.data?.percentage)">{{f.name}}</nb-progress-bar>
+        <i class="ionicon ion-close-round" (click)="cancelUpload(f.id)"></i>
+      </nb-list-item>
+    </nb-list>
+  </div>
+</div>
