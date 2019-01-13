@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { UploadOutput, UploadInput, UploadFile, humanizeBytes, UploaderOptions, UploadStatus } from 'ngx-uploader';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { saveAs } from 'file-saver';
 @Component({
   selector: 'mob-file-upload',
   templateUrl: './mob-file-upload.component.html',
@@ -63,9 +64,27 @@ export class MobFileUploadComponent implements OnInit {
       this.dragOver = false;
     } else if (output.type === 'rejected' && typeof output.file !== 'undefined') {
       console.log(output.file.name + ' rejected');
+    } else if (output.type === 'done') {
+      console.log(output);
+      let filename = '';
+      const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+      const matches = filenameRegex.exec(output.file.responseHeaders['content-disposition']);
+      if (matches != null && matches[1]) {
+        filename = matches[1].replace(/['"]/g, '');
+      }
+      this.downloadFile(
+        output.file.response,
+        output.file.responseHeaders['content-type'],
+        filename
+      );
     }
 
     // this.files = this.files.filter(file => file.progress.status !== UploadStatus.Done);
+  }
+
+  downloadFile(data: any, type: any, filename: any) {
+    const blob = new Blob([data], { type: type });
+    saveAs(blob, filename);
   }
 
   startUpload(): void {
