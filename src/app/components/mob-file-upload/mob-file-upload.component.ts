@@ -48,7 +48,7 @@ export class MobFileUploadComponent implements OnInit {
     if (output.type === 'allAddedToQueue') {
       const event: UploadInput = {
         type: 'uploadAll',
-        url: '/upload',
+        url: '/api/upload/files',
         method: 'POST',
         data: { foo: 'bar' }
       };
@@ -77,7 +77,7 @@ export class MobFileUploadComponent implements OnInit {
   startUpload(): void {
     const event: UploadInput = {
       type: 'uploadAll',
-      url: '/upload',
+      url: '/api/upload/files',
       method: 'POST',
       data: { foo: 'bar' }
     };
