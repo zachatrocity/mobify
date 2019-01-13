@@ -8,8 +8,7 @@
     "test:client": "ng test --watch false",
     "e2e:client": "ng e2e",
     "build": "ng build --prod --output-path=dist/client && npm run server:build",
-    "server:run": "node dist/server/app.js",
-    "server:watch": "tsc -p ./server --watch",
+    "server:run": "nodemon",
     "server:build": "tsc -p ./server",
     "postinstall": "npm run build"
   },
@@ -32,8 +31,10 @@
     "flexboxgrid": "^6.3.1",
     "multer": "^1.4.1",
     "ngx-uploader": "^7.1.0",
+    "nodemon": "^1.18.9",
     "normalize.css": "^8.0.1",
     "rxjs": "~6.3.3",
+    "ts-node": "^7.0.1",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {

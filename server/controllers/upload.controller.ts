@@ -1,6 +1,6 @@
 import { Router, Request, Response } from 'express';
 import * as multer from 'multer';
-let upload = multer.default({ dest: 'uploads/' })
+let upload = multer({ dest: 'uploads/' })
 
 const router: Router = Router();
 
